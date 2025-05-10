@@ -399,3 +399,40 @@ peerChaincodeInvokeTls() {
     --cafile "/var/hyperledger/cli/$CA_CERT" \
     2>&1
 }
+
+chaincodeInstallFromImage() {
+  local CLI_NAME=$1
+  local PEER_ADDRESS=$2
+  local CHAINCODE_NAME=$3
+  local CHAINCODE_VERSION=$4
+  local CHAINCODE_LABEL="${CHAINCODE_NAME}_$CHAINCODE_VERSION"
+  local IMAGE_NAME=$5
+  local IMAGE_TAG=$6
+  local CA_CERT=$7
+
+  echo "Installing external chaincode $CHAINCODE_NAME from image $IMAGE_NAME:$IMAGE_TAG..."
+  inputLog "CLI_NAME: $CLI_NAME"
+  inputLog "PEER_ADDRESS: $PEER_ADDRESS"
+  inputLog "CHAINCODE_NAME: $CHAINCODE_NAME"
+  inputLog "CHAINCODE_VERSION: $CHAINCODE_VERSION"
+  inputLog "CHAINCODE_LABEL: $CHAINCODE_LABEL"
+  inputLog "IMAGE_NAME: $IMAGE_NAME"
+  inputLog "IMAGE_TAG: $IMAGE_TAG"
+  inputLog "CA_CERT: $CA_CERT"
+
+  local CA_CERT_PARAMS=()
+  if [ -n "$CA_CERT" ]; then
+    CA_CERT_PARAMS=(--tlsRootCertFiles "/var/hyperledger/cli/$CA_CERT")
+  fi
+
+  # Pull the chaincode image if it doesn't exist
+  dockerPullIfMissing "$IMAGE_NAME:$IMAGE_TAG"
+
+  # Register the external chaincode image as installed
+  docker exec -e CORE_PEER_ADDRESS="$PEER_ADDRESS" "$CLI_NAME" peer lifecycle chaincode installexternal \
+    --name "$CHAINCODE_NAME" \
+    --version "$CHAINCODE_VERSION" \
+    --label "$CHAINCODE_LABEL" \
+    --image "$IMAGE_NAME:$IMAGE_TAG" \
+    "${CA_CERT_PARAMS[@]+"${CA_CERT_PARAMS[@]}"}"
+}
