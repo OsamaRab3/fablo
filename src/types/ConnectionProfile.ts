@@ -117,9 +117,10 @@ function createPeers(
     if ((orgName === o.name && isExplorer) || !isExplorer) {
       o.anchorPeers.forEach((p: PeerConfig) => {
         const tlsCACertsExplorerPath = `${rootPath}/peerOrganizations/${o.domain}/msp/tlscacerts/tlsca.${o.domain}-cert.pem`;
+        const peerPort = p.port === 7042 ? 7043 : p.port;
         if (isTls) {
           peers[p.address] = {
-            url: isExplorer ? `grpcs://${p.address}:${p.port}` : `grpcs://localhost:${p.port}`,
+            url: isExplorer ? `grpcs://${p.address}:${peerPort}` : `grpcs://localhost:${peerPort}`,
             tlsCACerts: {
               path: isExplorer
                 ? tlsCACertsExplorerPath
@@ -133,7 +134,7 @@ function createPeers(
           }
         } else {
           peers[p.address] = {
-            url: isExplorer ? `grpcs://${p.address}:${p.port}` : `grpcs://localhost:${p.port}`,
+            url: isExplorer ? `grpcs://${p.address}:${peerPort}` : `grpcs://localhost:${peerPort}`,
           };
           if (isExplorer) {
             peers[p.address]["tlsCACerts"] = {

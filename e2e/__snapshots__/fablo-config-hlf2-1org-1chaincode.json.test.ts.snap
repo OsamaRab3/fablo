@@ -212,7 +212,7 @@ exports[`samples/fablo-config-hlf2-1org-1chaincode.json should create proper e2e
       "url": "grpcs://localhost:7041"
     },
     "peer1.org1.example.com": {
-      "url": "grpcs://localhost:7042"
+      "url": "grpcs://localhost:7043"
     }
   },
   "certificateAuthorities": {
@@ -246,7 +246,7 @@ peers:
   peer0.org1.example.com:
     url: grpcs://localhost:7041
   peer1.org1.example.com:
-    url: grpcs://localhost:7042
+    url: grpcs://localhost:7043
 certificateAuthorities:
   ca.orderer.example.com:
     url: http://localhost:7020
@@ -281,7 +281,7 @@ exports[`samples/fablo-config-hlf2-1org-1chaincode.json should create proper e2e
       "url": "grpcs://localhost:7041"
     },
     "peer1.org1.example.com": {
-      "url": "grpcs://localhost:7042"
+      "url": "grpcs://localhost:7043"
     }
   },
   "certificateAuthorities": {
@@ -315,7 +315,7 @@ peers:
   peer0.org1.example.com:
     url: grpcs://localhost:7041
   peer1.org1.example.com:
-    url: grpcs://localhost:7042
+    url: grpcs://localhost:7043
 certificateAuthorities:
   ca.org1.example.com:
     url: http://localhost:7040
@@ -2025,8 +2025,8 @@ services:
     command: peer node start
     ports:
       - 8042:9440
-      - 7042:7042
-      - 7043:7043
+      - 7043:7042
+      - 7044:7043
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/peer/msp

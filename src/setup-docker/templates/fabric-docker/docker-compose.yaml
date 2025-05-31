@@ -293,8 +293,13 @@ services:
     command: peer node start <%= global.peerDevMode ? '--peer-chaincodedev=true' : '' %>
     ports:
       - <%= peer.port + 1000 %>:9440
+      <%_ if (peer.port === 7042) { _%>
+      - 7043:<%= peer.port %>
+      - <%= peer.port + 2 %>:<%= peer.port + 1 %>
+      <%_ } else { _%>
       - <%= peer.port %>:<%= peer.port %>
       - <%= peer.port + 1 %>:<%= peer.port + 1 %>
+      <%_ } _%>
     <%_ if(peer.db.type==="CouchDb") { _%>
     depends_on:
       couchdb.<%= peer.name %>.<%= org.domain %>:

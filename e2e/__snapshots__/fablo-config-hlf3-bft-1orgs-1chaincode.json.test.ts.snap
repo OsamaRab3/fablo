@@ -260,7 +260,7 @@ exports[`samples/fablo-config-hlf3-bft-1orgs-1chaincode.json should create prope
       }
     },
     "peer1.org1.example.com": {
-      "url": "grpcs://localhost:7042",
+      "url": "grpcs://localhost:7043",
       "tlsCACerts": {
         "path": "<absolute path>/samples/fablo-target/fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt"
       },
@@ -308,7 +308,7 @@ peers:
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
   peer1.org1.example.com:
-    url: grpcs://localhost:7042
+    url: grpcs://localhost:7043
     tlsCACerts:
       path: >-
         <absolute path>/samples/fablo-target/fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
@@ -357,7 +357,7 @@ exports[`samples/fablo-config-hlf3-bft-1orgs-1chaincode.json should create prope
       }
     },
     "peer1.org1.example.com": {
-      "url": "grpcs://localhost:7042",
+      "url": "grpcs://localhost:7043",
       "tlsCACerts": {
         "path": "<absolute path>/samples/fablo-target/fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt"
       },
@@ -405,7 +405,7 @@ peers:
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
   peer1.org1.example.com:
-    url: grpcs://localhost:7042
+    url: grpcs://localhost:7043
     tlsCACerts:
       path: >-
         <absolute path>/samples/fablo-target/fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
@@ -2292,8 +2292,8 @@ services:
     command: peer node start
     ports:
       - 8042:9440
-      - 7042:7042
-      - 7043:7043
+      - 7043:7042
+      - 7044:7043
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/peer/msp
