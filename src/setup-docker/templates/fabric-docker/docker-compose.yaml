@@ -246,11 +246,13 @@ services:
       - CORE_PEER_LOCALMSPID=<%= org.mspName %>
       - CORE_PEER_ID=<%= peer.address %>
       - CORE_PEER_ADDRESS=<%= peer.fullAddress %>
-      - CORE_PEER_LISTENADDRESS=<%= peer.fullAddress %>
-      - CORE_PEER_GOSSIP_ENDPOINT=<%= peer.fullAddress %><% if(peer.isAnchorPeer) { %>
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=<%= peer.fullAddress %><% } %>
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:<%= peer.port %>
+      - CORE_PEER_CHAINCODEADDRESS=<%= peer.address %>:<%= peer.port + 1 %>
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:<%= peer.port + 1 %>
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=<%= peer.fullAddress %>
       - CORE_PEER_GOSSIP_BOOTSTRAP=<%- org.bootstrapPeers %>
-      - CORE_PEER_CHAINCODELISTENADDRESS=<%= peer.address %>:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
@@ -274,6 +276,7 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
       <%_ } _%>
       <%_ if(peer.db.type==="CouchDb") { _%>
       # CouchDB
@@ -291,9 +294,7 @@ services:
     ports:
       - <%= peer.port + 1000 %>:9440
       - <%= peer.port %>:<%= peer.port %>
-      <%_ if(global.peerDevMode) { _%>
-      - <%= peer.port + 1500 %>:7050
-      <%_ } _%>
+      - <%= peer.port + 1 %>:<%= peer.port + 1 %>
     <%_ if(peer.db.type==="CouchDb") { _%>
     depends_on:
       couchdb.<%= peer.name %>.<%= org.domain %>:
