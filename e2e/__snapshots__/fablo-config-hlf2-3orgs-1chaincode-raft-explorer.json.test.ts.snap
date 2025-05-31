@@ -4276,11 +4276,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_ID=peer0.org1.example.com
       - CORE_PEER_ADDRESS=peer0.org1.example.com:7041
-      - CORE_PEER_LISTENADDRESS=peer0.org1.example.com:7041
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.org1.example.com:7041
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7041
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org1.example.com:7042
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7042
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7041
       - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.org1.example.com:7041 peer1.org1.example.com:7042"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org1.example.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:\${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:\${FABRIC_BASEOS_VERSION}
@@ -4303,11 +4305,13 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
     working_dir: /etc/hyperledger/fabric/peer/
     command: peer node start
     ports:
       - 8041:9440
       - 7041:7041
+      - 7042:7042
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/peer/msp
@@ -4323,11 +4327,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_ID=peer1.org1.example.com
       - CORE_PEER_ADDRESS=peer1.org1.example.com:7042
-      - CORE_PEER_LISTENADDRESS=peer1.org1.example.com:7042
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.org1.example.com:7042
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7042
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org1.example.com:7043
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7043
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.example.com:7042
       - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.org1.example.com:7041 peer1.org1.example.com:7042"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org1.example.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:\${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:\${FABRIC_BASEOS_VERSION}
@@ -4350,11 +4356,13 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
     working_dir: /etc/hyperledger/fabric/peer/
     command: peer node start
     ports:
       - 8042:9440
       - 7042:7042
+      - 7043:7043
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/peer/msp
@@ -4505,11 +4513,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org2MSP
       - CORE_PEER_ID=peer0.org2.example.com
       - CORE_PEER_ADDRESS=peer0.org2.example.com:7061
-      - CORE_PEER_LISTENADDRESS=peer0.org2.example.com:7061
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.org2.example.com:7061
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7061
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org2.example.com:7062
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7062
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.example.com:7061
       - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.org2.example.com:7061 peer1.org2.example.com:7062"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org2.example.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:\${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:\${FABRIC_BASEOS_VERSION}
@@ -4532,11 +4542,13 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
     working_dir: /etc/hyperledger/fabric/peer/
     command: peer node start
     ports:
       - 8061:9440
       - 7061:7061
+      - 7062:7062
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/peer/msp
@@ -4552,11 +4564,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org2MSP
       - CORE_PEER_ID=peer1.org2.example.com
       - CORE_PEER_ADDRESS=peer1.org2.example.com:7062
-      - CORE_PEER_LISTENADDRESS=peer1.org2.example.com:7062
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.org2.example.com:7062
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7062
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org2.example.com:7063
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7063
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.example.com:7062
       - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.org2.example.com:7061 peer1.org2.example.com:7062"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org2.example.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:\${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:\${FABRIC_BASEOS_VERSION}
@@ -4579,11 +4593,13 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
     working_dir: /etc/hyperledger/fabric/peer/
     command: peer node start
     ports:
       - 8062:9440
       - 7062:7062
+      - 7063:7063
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp:/etc/hyperledger/fabric/peer/msp
@@ -4734,11 +4750,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org3MSP
       - CORE_PEER_ID=peer0.org3.example.com
       - CORE_PEER_ADDRESS=peer0.org3.example.com:7081
-      - CORE_PEER_LISTENADDRESS=peer0.org3.example.com:7081
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.org3.example.com:7081
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7081
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org3.example.com:7082
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7082
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.example.com:7081
       - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.org3.example.com:7081 peer1.org3.example.com:7082"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org3.example.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:\${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:\${FABRIC_BASEOS_VERSION}
@@ -4761,11 +4779,13 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
     working_dir: /etc/hyperledger/fabric/peer/
     command: peer node start
     ports:
       - 8081:9440
       - 7081:7081
+      - 7082:7082
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp:/etc/hyperledger/fabric/peer/msp
@@ -4781,11 +4801,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org3MSP
       - CORE_PEER_ID=peer1.org3.example.com
       - CORE_PEER_ADDRESS=peer1.org3.example.com:7082
-      - CORE_PEER_LISTENADDRESS=peer1.org3.example.com:7082
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.org3.example.com:7082
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7082
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org3.example.com:7083
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7083
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org3.example.com:7082
       - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.org3.example.com:7081 peer1.org3.example.com:7082"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org3.example.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:\${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:\${FABRIC_BASEOS_VERSION}
@@ -4808,11 +4830,13 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/peer/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/peer/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer/tls/ca.crt
+      - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
     working_dir: /etc/hyperledger/fabric/peer/
     command: peer node start
     ports:
       - 8082:9440
       - 7082:7082
+      - 7083:7083
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-config/crypto-config/peerOrganizations/org3.example.com/peers/peer1.org3.example.com/msp:/etc/hyperledger/fabric/peer/msp
