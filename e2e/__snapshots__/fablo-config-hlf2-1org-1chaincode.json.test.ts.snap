@@ -209,10 +209,10 @@ exports[`samples/fablo-config-hlf2-1org-1chaincode.json should create proper e2e
   },
   "peers": {
     "peer0.org1.example.com": {
-      "url": "grpc://localhost:7041"
+      "url": "grpcs://localhost:7041"
     },
     "peer1.org1.example.com": {
-      "url": "grpc://localhost:7042"
+      "url": "grpcs://localhost:7042"
     }
   },
   "certificateAuthorities": {
@@ -244,9 +244,9 @@ organizations:
       - ca.orderer.example.com
 peers:
   peer0.org1.example.com:
-    url: grpc://localhost:7041
+    url: grpcs://localhost:7041
   peer1.org1.example.com:
-    url: grpc://localhost:7042
+    url: grpcs://localhost:7042
 certificateAuthorities:
   ca.orderer.example.com:
     url: http://localhost:7020
@@ -278,10 +278,10 @@ exports[`samples/fablo-config-hlf2-1org-1chaincode.json should create proper e2e
   },
   "peers": {
     "peer0.org1.example.com": {
-      "url": "grpc://localhost:7041"
+      "url": "grpcs://localhost:7041"
     },
     "peer1.org1.example.com": {
-      "url": "grpc://localhost:7042"
+      "url": "grpcs://localhost:7042"
     }
   },
   "certificateAuthorities": {
@@ -313,9 +313,9 @@ organizations:
       - ca.org1.example.com
 peers:
   peer0.org1.example.com:
-    url: grpc://localhost:7041
+    url: grpcs://localhost:7041
   peer1.org1.example.com:
-    url: grpc://localhost:7042
+    url: grpcs://localhost:7042
 certificateAuthorities:
   ca.org1.example.com:
     url: http://localhost:7040

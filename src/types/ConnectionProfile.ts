@@ -119,7 +119,7 @@ function createPeers(
         const tlsCACertsExplorerPath = `${rootPath}/peerOrganizations/${o.domain}/msp/tlscacerts/tlsca.${o.domain}-cert.pem`;
         if (isTls) {
           peers[p.address] = {
-            url: isExplorer ? `grpcs://${p.fullAddress}` : `grpcs://localhost:${p.port}`,
+            url: isExplorer ? `grpcs://${p.address}:${p.port}` : `grpcs://localhost:${p.port}`,
             tlsCACerts: {
               path: isExplorer
                 ? tlsCACertsExplorerPath
@@ -133,7 +133,7 @@ function createPeers(
           }
         } else {
           peers[p.address] = {
-            url: isExplorer ? `grpc://${p.fullAddress}` : `grpc://localhost:${p.port}`,
+            url: isExplorer ? `grpcs://${p.address}:${p.port}` : `grpcs://localhost:${p.port}`,
           };
           if (isExplorer) {
             peers[p.address]["tlsCACerts"] = {
